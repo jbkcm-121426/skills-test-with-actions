@@ -18,6 +18,8 @@ jobs:
       - name: Create Directory
         run: mkdir golang_app
         working-directory: .
+      - name: Get Init
+        run: go mod init app
       - name: Get Dependencies
         run: go get app
       - name: Build
