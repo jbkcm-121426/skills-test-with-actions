@@ -12,8 +12,7 @@ jobs:
         working-directory: src
     steps:
       - name: Create Source Directory
-        run: mkdir src
-        working-directory: .
+        run: mkdir src        
       - name: Use Python
         run: import os; print("I'm running python! Hissssss! " + os.getcwd());        
         working-directory: src
