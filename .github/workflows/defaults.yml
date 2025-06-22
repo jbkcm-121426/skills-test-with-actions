@@ -6,21 +6,20 @@ jobs:
   first-job:
     name: First Job
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: src
     steps:
       - name: Create Source Directory
-        run: mkdir src
-        shell: bash
+        run: mkdir src        
       - name: Use Python
-        run: import os; print("I'm running python! Hissssss! " + os.getcwd());
-        shell: python
+        run: import os; print("I'm running python! Hissssss! " + os.getcwd());        
         working-directory: src
       - name: Use Bash
-        run: echo "I'm running hum-drum bash in $(pwd). Booo."
-        shell: bash
-        working-directory: src
+        run: echo "I'm running hum-drum bash in $(pwd). Booo."       
       - name: Use Bash Also
-        run: echo "I'm running bash also, but elsewhere in $(pwd). Booo."
-        shell: bash
+        run: echo "I'm running bash also, but elsewhere in $(pwd). Booo."     
   second-job:
     name: Second Job
     runs-on: ubuntu-latest
