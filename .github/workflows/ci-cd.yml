@@ -47,6 +47,9 @@ jobs:
     name: Continuous Delivery
     needs: ci
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     defaults:
       run:
         working-directory: docker_image
