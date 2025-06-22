@@ -15,3 +15,14 @@ jobs:
           clean: true
       - name: List Directory Contents Again
         run: ls -latr
+      - name: Use Git Hub Script Action
+        uses: actions/github-script@v6
+        with:
+          script: |
+             const create = await github.rest.issues.create({
+             owner: context.repo.owner,
+             repo: context.repo.repo,
+             title: "Learning To Use Script-Actions!",
+             body: "Hey, we used script actions! Here's the commit SHA that triggered this: ${{github.sha}}"
+             })
+             return create.data.number
