@@ -25,3 +25,8 @@ jobs:
           working-directory: golang_app
       - name: Run Tests
         run: go test
+      - name: Store Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: golang_app
+          path: golang_app/app
