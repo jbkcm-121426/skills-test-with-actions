@@ -15,12 +15,12 @@ jobs:
         run: mkdir src        
       - name: Use Python
         run: import os; print("I'm running python! Hissssss! " + os.getcwd());        
-        working-directory: src
+        working-directory: ./
       - name: Use Bash
         run: echo "I'm running hum-drum bash in $(pwd). Booo."       
       - name: Use Bash Also
         run: echo "I'm running bash also, but elsewhere in $(pwd). Booo."     
-        working-directory: ..
+        working-directory: ./
   second-job:
     name: Second Job
     runs-on: ubuntu-latest

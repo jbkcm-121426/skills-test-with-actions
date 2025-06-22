@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define the remote and branch. Adjust if you don't use 'origin' and 'main'.
-REMOTE="origin"
-BRANCH="main"
+REMOTE="feature"
+BRANCH="defaults"
 
 # Get the current timestamp
 TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
