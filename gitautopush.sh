@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the remote and branch. Adjust if you don't use 'origin' and 'main'.
-REMOTE="remote"
+REMOTE="origin"
 BRANCH="feature/defaults"
 
 # Get the current timestamp
