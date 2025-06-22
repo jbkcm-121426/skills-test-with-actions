@@ -13,6 +13,9 @@ jobs:
       run:
         working-directory: golang_app
     steps:
+      - name: Create Directory
+        run: mkdir golang_app
+        working-directory: .
       - name: Clone
         uses: actions/checkout@v3.1.0
       - name: Get Dependencies
