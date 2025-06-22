@@ -28,6 +28,7 @@ jobs:
       - name: Create Source Directory
         run: mkdir src
         shell: bash
+        working-directory: .
       - name: Use Bash
         run: echo "I'm running bash in $(pwd). So sad."
         shell: bash
