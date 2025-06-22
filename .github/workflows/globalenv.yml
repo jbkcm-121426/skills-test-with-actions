@@ -3,7 +3,7 @@ on:
   push:
     branches: feature/global-env
 env:
-  GLOBAL_VAR: test
+  GLOBAL_VAR: This is Global Variable
 jobs:
   first-job:
     name: A Job
