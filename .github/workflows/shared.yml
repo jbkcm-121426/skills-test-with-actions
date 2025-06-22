@@ -4,7 +4,7 @@ on:
     branches: main
 jobs:
   centralized-job:
-    uses: ./.github/workflows/manual.yaml
+    uses: ./.github/workflows/manual.yml
     with:
       choice-example: debug
       string-example: a thing
