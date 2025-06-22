@@ -1,4 +1,4 @@
-name: Concurrent Workflows No. 2
+name: Concurrency Group No. 2
 on:
   push:
     branches: feature/concurrency
@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: 
       group: static-group
+      cancel-in-progress: true
     steps:
       - name: The Other Thing I've Done
         run: echo "I've done another thing!"; sleep 15;
