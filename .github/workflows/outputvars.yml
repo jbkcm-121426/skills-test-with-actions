@@ -1,5 +1,5 @@
 name: outputvar
-# This will run every time we push to the ci.yml file ss
+# This will run every time we push to the ci.yml file ssss
 on:
   workflow_dispatch:
   push:
