@@ -1,3 +1,12 @@
+name: Step 3, Upload test reports
+# This will run every time we push to the ci.yml file 
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/ci.yml
 jobs:
   job1:
     runs-on: ubuntu-latest
