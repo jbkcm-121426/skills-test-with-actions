@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JP1 to Cloud-Native Transformation</title>
+    <style>
+        @media print {
+            .page-break {
+                page-break-after: always;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .slide {
+            background: white;
+            padding: 60px;
+            margin: 0 auto 30px;
+            max-width: 1200px;
+            min-height: 800px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .slide-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        
+        .slide-subtitle {
+            font-size: 24px;
+            color: #64748b;
+            margin-bottom: 40px;
+        }
+        
+        .box {
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .box-blue {
+            background: #dbeafe;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .box-green {
+            background: #dcfce7;
+            border-left: 4px solid #16a34a;
+        }
+        
+        .box-red {
+            background: #fee2e2;
+            border-left: 4px solid #dc2626;
+        }
+        
+        .box-orange {
+            background: #ffedd5;
+            border-left: 4px solid #ea580c;
+        }
+        
+        .box-purple {
+            background: #f3e8ff;
+            border-left: 4px solid #9333ea;
+        }
+        
+        .box-yellow {
+            background: #fef3c7;
+            border-left: 4px solid #ca8a04;
+        }
+        
+        .box-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .metric-box {
+            text-align: center;
+            padding: 24px;
+            border-radius: 8px;
+            border: 3px solid;
+        }
+        
+        .metric-value {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .metric-label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .metric-desc {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        .phase-box {
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            margin-bottom: 16px;
+        }
+        
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .phase-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .phase-duration {
+            background: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .banner {
+            text-align: center;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+        
+        .gradient-banner {
+            background: linear-gradient(to right, #2563eb, #16a34a);
+            color: white;
+        }
+        
+        .architecture-layer {
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            border: 2px solid;
+        }
+        
+        .layer-icon {
+            font-size: 24px;
+            margin-right: 8px;
+        }
+        
+        .layer-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .layer-content {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .layer-features {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .risk-box {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .risk-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .risk-desc {
+            font-size: 12px;
+            color: #64748b;
+            margin: 4px 0;
+        }
+        
+        .risk-mitigation {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        
+        .investment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            padding: 24px;
+            background: white;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .investment-section {
+            font-size: 14px;
+        }
+        
+        .investment-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #374151;
+        }
+        
+        .investment-total {
+            margin-top: 12px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 24px;
+            background: linear-gradient(to right, #2563eb, #16a34a);
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 24px;
+        }
+        
+        .benefit-item {
+            font-size: 14px;
+        }
+        
+        .benefit-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .benefit-desc {
+            opacity: 0.9;
+            font-size: 13px;
+        }
+        
+        @media print {
+            .slide {
+                box-shadow: none;
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TITLE SLIDE -->
+<div class="slide page-break">
+    <div class="slide-title">JP1 to Cloud-Native Transformation</div>
+    <div class="slide-subtitle">Enterprise Scheduling Modernization Roadmap</div>
+    
+    <div style="margin-top: 60px;">
+        <div class="two-column">
+            <div class="box box-blue">
+                <div class="box-title" style="color: #1e3a8a;">Current State</div>
+                <ul style="color: #374151;">
+                    <li>Hitachi JP1 scheduler on Azure infrastructure</li>
+                    <li>Multiple EDI and FTP integrations with external parties</li>
+                    <li>Legacy architecture limiting agility and scalability</li>
+                </ul>
+            </div>
+            
+            <div class="box box-green">
+                <div class="box-title" style="color: #14532d;">Target State</div>
+                <ul style="color: #374151;">
+                    <li>Cloud-native, serverless scheduling architecture</li>
+                    <li>API-driven, event-based integrations</li>
+                    <li>Enhanced monitoring, resilience, and cost optimization</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="banner gradient-banner" style="font-size: 20px;">
+            Strategic Migration Journey
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 1: CHALLENGES & DRIVERS -->
+<div class="slide page-break">
+    <div class="slide-title">Current Challenges & Drivers for Change</div>
+    
+    <div class="two-column" style="margin-top: 40px;">
+        <div>
+            <div class="box box-red">
+                <div class="box-title" style="color: #991b1b;">Technical Challenges</div>
+                <ul style="color: #374151; font-size: 14px;">
+                    <li><strong>Infrastructure overhead:</strong> VM-based JP1 requires patching, maintenance</li>
+                    <li><strong>Scalability limits:</strong> Difficult to handle burst workloads</li>
+                    <li><strong>Integration complexity:</strong> Point-to-point FTP/EDI connections</li>
+                    <li><strong>Limited observability:</strong> Scattered logs and monitoring</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div>
+            <div class="box box-orange">
+                <div class="box-title" style="color: #9a3412;">Business Impact</div>
+                <ul style="color: #374151; font-size: 14px;">
+                    <li><strong>High TCO:</strong> License + infrastructure costs</li>
+                    <li><strong>Slow time-to-market:</strong> Manual job configuration</li>
+                    <li><strong>Risk exposure:</strong> Single point of failure</li>
+                    <li><strong>Skill dependency:</strong> Specialized JP1 expertise required</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="box box-blue" style="margin-top: 24px;">
+        <div class="box-title" style="color: #1e3a8a;">Strategic Drivers</div>
+        <div class="three-column" style="margin-top: 16px;">
+            <div style="text-align: center;">
+                <div style="font-size: 36px; font-weight: bold; color: #2563eb; margin-bottom: 8px;">40-60%</div>
+                <div style="color: #64748b;">Cost Reduction Target</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 36px; font-weight: bold; color: #2563eb; margin-bottom: 8px;">10x</div>
+                <div style="color: #64748b;">Faster Deployment</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 36px; font-weight: bold; color: #2563eb; margin-bottom: 8px;">99.9%</div>
+                <div style="color: #64748b;">Target Availability</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 2: ARCHITECTURE -->
+<div class="slide page-break">
+    <div class="slide-title">Cloud-Native Architecture Blueprint</div>
+    
+    <div style="background: linear-gradient(to right, #2563eb, #1e40af); color: white; padding: 16px; border-radius: 8px; text-align: center; margin: 40px 0 30px 0;">
+        <div style="font-size: 22px; font-weight: bold;">Azure-Native Scheduling Stack</div>
+    </div>
+    
+    <div class="architecture-layer" style="background: #f3e8ff; border-color: #9333ea;">
+        <div class="layer-title" style="color: #581c87;">
+            <span class="layer-icon">🎯</span> Orchestration Layer
+        </div>
+        <div class="layer-content" style="color: #374151;">
+            <strong>Azure Logic Apps / Azure Data Factory</strong> - Primary workflow orchestration
+        </div>
+        <div class="layer-features">
+            ✓ Visual workflow design | ✓ 400+ connectors | ✓ Built-in retry logic
+        </div>
+    </div>
+    
+    <div class="architecture-layer" style="background: #dbeafe; border-color: #2563eb;">
+        <div class="layer-title" style="color: #1e3a8a;">
+            <span class="layer-icon">⚡</span> Compute Layer
+        </div>
+        <div class="layer-content" style="color: #374151;">
+            <strong>Azure Functions + Container Apps</strong> - Serverless execution
+        </div>
+        <div class="layer-features">
+            ✓ Event-driven | ✓ Auto-scaling | ✓ Pay-per-execution
+        </div>
+    </div>
+    
+    <div class="architecture-layer" style="background: #dcfce7; border-color: #16a34a;">
+        <div class="layer-title" style="color: #14532d;">
+            <span class="layer-icon">🔄</span> Integration Layer
+        </div>
+        <div class="layer-content" style="color: #374151;">
+            <strong>Azure API Management + Service Bus</strong> - Unified integration hub
+        </div>
+        <div class="layer-features">
+            ✓ Replace point-to-point FTP/EDI | ✓ Async messaging | ✓ Security & throttling
+        </div>
+    </div>
+    
+    <div class="architecture-layer" style="background: #fef3c7; border-color: #ca8a04;">
+        <div class="layer-title" style="color: #854d0e;">
+            <span class="layer-icon">📊</span> Observability Layer
+        </div>
+        <div class="layer-content" style="color: #374151;">
+            <strong>Azure Monitor + Application Insights</strong> - End-to-end visibility
+        </div>
+        <div class="layer-features">
+            ✓ Distributed tracing | ✓ Alerting | ✓ Dashboards
+        </div>
+    </div>
+    
+    <div style="background: #f3f4f6; padding: 16px; border-radius: 8px; font-size: 14px; margin-top: 20px;">
+        <strong>Data Transfer Migration:</strong> FTP → Azure Blob Storage + Event Grid | EDI → Logic Apps with EDI connectors or Azure Integration Account
+    </div>
+</div>
+
+<!-- SLIDE 3: PHASED MIGRATION -->
+<div class="slide page-break">
+    <div class="slide-title">Phased Migration Strategy</div>
+    
+    <div style="margin-top: 40px;">
+        <div class="phase-box" style="background: #dbeafe; border-color: #2563eb;">
+            <div class="phase-header">
+                <div class="phase-title" style="color: #1e3a8a;">Phase 1: Foundation (Months 1-3)</div>
+                <div class="phase-duration" style="background: #2563eb; color: white;">3 months</div>
+            </div>
+            <ul style="font-size: 14px; color: #374151; margin: 0;">
+                <li>✓ Job inventory and dependency mapping (JP1 job flow analysis)</li>
+                <li>✓ Setup Azure landing zone (Logic Apps, ADF, Storage, APIM)</li>
+                <li>✓ Pilot migration: 2-3 non-critical batch jobs</li>
+                <li>✓ Establish monitoring baselines and runbooks</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box" style="background: #dcfce7; border-color: #16a34a;">
+            <div class="phase-header">
+                <div class="phase-title" style="color: #14532d;">Phase 2: Integration Modernization (Months 4-7)</div>
+                <div class="phase-duration" style="background: #16a34a; color: white;">4 months</div>
+            </div>
+            <ul style="font-size: 14px; color: #374151; margin: 0;">
+                <li>✓ Migrate FTP integrations to Azure Blob + Event Grid pattern</li>
+                <li>✓ Implement EDI workflows using Logic Apps EDI connectors</li>
+                <li>✓ Build API gateway for external partner onboarding</li>
+                <li>✓ Parallel run with JP1 for validation</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box" style="background: #f3e8ff; border-color: #9333ea;">
+            <div class="phase-header">
+                <div class="phase-title" style="color: #581c87;">Phase 3: Core Workload Migration (Months 8-12)</div>
+                <div class="phase-duration" style="background: #9333ea; color: white;">5 months</div>
+            </div>
+            <ul style="font-size: 14px; color: #374151; margin: 0;">
+                <li>✓ Migrate critical batch jobs in waves (by business domain)</li>
+                <li>✓ Implement job dependency orchestration in ADF/Logic Apps</li>
+                <li>✓ Setup disaster recovery and business continuity</li>
+                <li>✓ User training and documentation</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box" style="background: #ffedd5; border-color: #ea580c;">
+            <div class="phase-header">
+                <div class="phase-title" style="color: #9a3412;">Phase 4: Optimization & Decommission (Months 13-15)</div>
+                <div class="phase-duration" style="background: #ea580c; color: white;">3 months</div>
+            </div>
+            <ul style="font-size: 14px; color: #374151; margin: 0;">
+                <li>✓ Performance tuning and cost optimization</li>
+                <li>✓ Hypercare support period (30-60 days)</li>
+                <li>✓ JP1 infrastructure decommissioning</li>
+                <li>✓ Post-migration audit and lessons learned</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: RISKS & SUCCESS FACTORS -->
+<div class="slide page-break">
+    <div class="slide-title">Risk Mitigation & Success Factors</div>
+    
+    <div class="two-column" style="margin-top: 40px;">
+        <div>
+            <div style="background: #fee2e2; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 18px; color: #991b1b; margin-bottom: 16px;">
+                ⚠️ Key Risks
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #991b1b;">Business Continuity</div>
+                <div class="risk-desc">Risk: Service disruption during cutover</div>
+                <div class="risk-mitigation"><strong>Mitigation:</strong> Blue-green deployment, parallel runs, rollback plan</div>
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #991b1b;">Integration Complexity</div>
+                <div class="risk-desc">Risk: External partner coordination delays</div>
+                <div class="risk-mitigation"><strong>Mitigation:</strong> Phased partner migration, maintain FTP bridge temporarily</div>
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #991b1b;">Data Loss</div>
+                <div class="risk-desc">Risk: Job execution history or data in-flight</div>
+                <div class="risk-mitigation"><strong>Mitigation:</strong> Comprehensive backup, transaction logging, idempotent design</div>
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #991b1b;">Skill Gap</div>
+                <div class="risk-desc">Risk: Team unfamiliar with cloud-native tools</div>
+                <div class="risk-mitigation"><strong>Mitigation:</strong> Early training, CoE setup, vendor support engagement</div>
+            </div>
+        </div>
+        
+        <div>
+            <div style="background: #dcfce7; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 18px; color: #14532d; margin-bottom: 16px;">
+                ✅ Critical Success Factors
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #14532d;">Executive Sponsorship</div>
+                <div style="font-size: 12px; color: #374151; margin-top: 4px;">Secure C-level buy-in for budget and organizational change management</div>
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #14532d;">Cross-Functional Team</div>
+                <div style="font-size: 12px; color: #374151; margin-top: 4px;">Infrastructure, Application, Integration, Security teams aligned from day 1</div>
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #14532d;">Automated Testing</div>
+                <div style="font-size: 12px; color: #374151; margin-top: 4px;">CI/CD pipelines with regression testing for every migrated job</div>
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #14532d;">Partner Communication</div>
+                <div style="font-size: 12px; color: #374151; margin-top: 4px;">Early notification to EDI/FTP partners with migration timeline and API specs</div>
+            </div>
+            
+            <div class="risk-box">
+                <div class="risk-title" style="color: #14532d;">Governance Model</div>
+                <div style="font-size: 12px; color: #374151; margin-top: 4px;">Weekly steering committee, clear RACI, change control process</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="box box-blue" style="margin-top: 24px; font-size: 14px;">
+        <strong>Recommendation:</strong> Start with a 2-week Discovery Workshop to validate assumptions, assess JP1 complexity, and refine roadmap with stakeholders
+    </div>
+</div>
+
+<!-- SLIDE 5: BUSINESS CASE -->
+<div class="slide page-break">
+    <div class="slide-title">Business Case & Expected Outcomes</div>
+    
+    <div class="three-column" style="margin-top: 40px;">
+        <div class="metric-box" style="background: #dcfce7; border-color: #16a34a;">
+            <div class="metric-value" style="color: #16a34a;">45-60%</div>
+            <div class="metric-label" style="color: #14532d;">Cost Reduction</div>
+            <div class="metric-desc">Eliminate JP1 licensing, reduce infrastructure by 70%</div>
+        </div>
+        <div class="metric-box" style="background: #dbeafe; border-color: #2563eb;">
+            <div class="metric-value" style="color: #2563eb;">80%</div>
+            <div class="metric-label" style="color: #1e3a8a;">Faster Deployment</div>
+            <div class="metric-desc">New workflows in hours vs. days</div>
+        </div>
+        <div class="metric-box" style="background: #f3e8ff; border-color: #9333ea;">
+            <div class="metric-value" style="color: #9333ea;">99.95%</div>
+            <div class="metric-label" style="color: #581c87;">Availability</div>
+            <div class="metric-desc">Azure SLA with multi-region DR</div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 30px; margin-bottom: 24px;">
+        <div style="font-size: 20px; font-weight: bold; margin-bottom: 16px; color: #374151;">Investment Overview (15-month program)</div>
+        <div class="investment-grid">
+            <div class="investment-section">
+                <div class="investment-title">One-Time Costs</div>
+                <ul style="color: #64748b; margin: 0; padding-left: 20px;">
+                    <li>Migration project team: $400K-600K</li>
+                    <li>Azure setup & tooling: $80K-120K</li>
+                    <li>Training & change mgmt: $50K-80K</li>
+                    <li>Consulting/SI partner: $200K-350K</li>
+                </ul>
+                <div class="investment-total" style="color: #374151;">Total: $730K-1.15M</div>
+            </div>
+            <div class="investment-section">
+                <div class="investment-title">Annual Recurring Savings</div>
+                <ul style="color: #64748b; margin: 0; padding-left: 20px;">
+                    <li>JP1 licensing elimination: $180K-250K</li>
+                    <li>Infrastructure reduction: $200K-300K</li>
+                    <li>Operational efficiency: $120K-180K</li>
+                </ul>
+                <div class="investment-total" style="color: #16a34a;">Savings: $500K-730K/year</div>
+                <div style="font-size: 12px; color: #16a34a; margin-top: 4px;">ROI: 12-18 months</div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-bottom: 24px;">
+        <div style="font-size: 20px; font-weight: bold; margin-bottom: 16px; color: white; background: linear-gradient(to right, #2563eb, #16a34a); padding: 12px; border-radius: 8px;">Strategic Benefits</div>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-title">🚀 Business Agility</div>
+                <div class="benefit-desc">Rapid integration of new partners and services</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">🔒 Enhanced Security</div>
+                <div class="benefit-desc">Azure-native encryption, RBAC, audit trails</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">📈 Scalability</div>
+                <div class="benefit-desc">Auto-scale for seasonal peaks, no capacity planning</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">🌍 Global Reach</div>
+                <div class="benefit-desc">Multi-region deployment for international expansion</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="box box-yellow" style="font-size: 14px;">
+        <strong>Next Steps:</strong> Schedule discovery workshop → Validate architecture → Secure budget approval → Launch Phase 1 pilot (Target: Q4 2025)
+    </div>
+</div>
+
+</body>
+</html>
