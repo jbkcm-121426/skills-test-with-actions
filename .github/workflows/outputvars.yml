@@ -1,10 +1,10 @@
-name: Step 3, Upload test reports
-# This will run every time we push to the ci.yml file 
+name: outputvar
+# This will run every time we push to the ci.yml file ssss
 on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - ci
     paths:
       - .github/workflows/ci.yml
 jobs:
